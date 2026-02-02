@@ -19,12 +19,12 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: json['id']??'',
-      title: json['title']??'',
-      price: json['price']??'',
-      description: json['description']??'',
-      category: json['category']??'',
-      image: json['image']??'',
+      id: json['id'],
+      title: json['title'],
+      price:( json['price'] as num).toDouble(),
+      description: json['description'],
+      category: json['category'],
+      image: json['image'],
       rating: Rating.fromJson(json['rating']),
     );
   }
@@ -36,7 +36,6 @@ class Rating {
 
   Rating({required this.rate, required this.count});
   factory Rating.fromJson(Map<String, dynamic> json) {
-    return Rating(rate: json['rate']??'', count: json['count']??'');
+    return Rating(rate:( json['rate'] as num).toDouble(), count: json['count']);
   }
 }
-

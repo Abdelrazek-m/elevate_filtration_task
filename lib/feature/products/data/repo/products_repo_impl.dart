@@ -1,24 +1,26 @@
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
-import 'package:elevate_filtration_task/core/services/api_service.dart';
+import '/core/services/api_service.dart';
 import '/feature/products/data/models/product_model.dart';
 
 import 'products_repo.dart';
 
 class ProductsRepoImpl extends ProductsRepo {
-  final ApiService apiService=.new();
+  final ApiService apiService = .new();
   @override
   Future<Either<String, List<ProductModel>>> getProductsList() async {
     try {
-      log('error 1');
       var data = await apiService.get(endPoint: 'products');
       List<ProductModel> productsList = [];
-      log('error 2');
-      for (var donateCase in data) {
-        productsList.add(ProductModel.fromJson(donateCase));
+      for (var product in data) {
+        try {
+          productsList.add(ProductModel.fromJson(product));
+        } catch (e) {
+          log('\n\n$e\n\n');
+          log(product.toString());
+        }
       }
-      log('error 3');
       return Right(productsList);
     } catch (e) {
       return Left(e.toString());

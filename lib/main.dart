@@ -1,3 +1,7 @@
+import '/feature/products/data/repo/products_repo_impl.dart';
+import '/feature/products/presentation/view_model/cubit/products_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'feature/products/presentation/view/products_page.dart';
 import 'package:flutter/material.dart';
 
@@ -10,9 +14,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '',
-      home: ProductsPage(),
+    return BlocProvider(
+      create: (_) => ProductsCubit(ProductsRepoImpl()),
+
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Elevate Filtration Task Solve',
+        home: ProductsPage(),
+      ),
     );
   }
 }
