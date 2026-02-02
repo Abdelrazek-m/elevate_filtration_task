@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 class ApiService {
   final dio = Dio();
-  final String baseUrl = 'https://fakestoreapi.com/products';
+  final String baseUrl = 'https://fakestoreapi.com/';
 
   Future<dynamic> get({
     required String endPoint,
